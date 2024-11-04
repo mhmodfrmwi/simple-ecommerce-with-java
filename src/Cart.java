@@ -6,10 +6,12 @@ public class Cart {
 
     public void add(Product product, int quantity) throws Exception {
         if (quantity > product.getProductQuantity()) {
-            throw new Exception("there is no enough quantity of "+product.getName());
+            throw new Exception("There is not enough quantity of " + product.getProductName());
         }
         cartItems.add(new CartItem(product, quantity));
     }
 
-    public List<CartItem> getItems() { return cartItems; }
+    public List<CartItem> getItems() {
+        return cartItems;
+    }
 }

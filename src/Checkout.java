@@ -29,7 +29,7 @@ public class Checkout {
         double shippingFee = 0;
         for (CartItem item : cart.getItems()) {
             Product product = item.getProduct();
-            if (product.isRequireShipping()) {
+            if (product instanceof ShippableProduct && ((ShippableProduct) product).isRequireShipping()) {
                 shippingFee += item.getQuantity() * (product.getProductPrice() * 0.03);
             }
         }
@@ -40,7 +40,9 @@ public class Checkout {
         double totalWeight = 0;
         for (CartItem item : cart.getItems()) {
             Product product = item.getProduct();
-            totalWeight += item.getQuantity() * product.getProductWeight();
+            if (product instanceof ShippableProduct) {
+                totalWeight += item.getQuantity() * ((ShippableProduct) product).getProductWeight();
+            }
         }
         return totalWeight;
     }
@@ -53,17 +55,17 @@ public class Checkout {
         System.out.println("** Shipment notice **");
         for (CartItem item : cart.getItems()) {
             Product product = item.getProduct();
-            if (product.isRequireShipping()) {
-                System.out.println(item.getQuantity() + "x " + product.getProductName() + "        " + product.getProductWeight()* item.getQuantity() + "g");
+            if (product instanceof ShippableProduct && ((ShippableProduct) product).isRequireShipping()) {
+                System.out.println(item.getQuantity() + "x " + product.getProductName() + "        " + ((ShippableProduct) product).getProductWeight() * item.getQuantity() + "g");
             }
         }
-        System.out.printf("Total package weight: %.2f kg%n%n", totalWeight / 1000);
+        System.out.println("Total package weight: " + totalWeight / 1000 + " kg");
     }
 
     private void printCheckoutReceipt(Cart cart) {
         System.out.println("** Checkout receipt **");
         for (CartItem item : cart.getItems()) {
-            System.out.println(item.getQuantity() + "x " + item.getProduct().getProductName() + "        " + item.getProduct().getProductPrice()* item.getQuantity());
+            System.out.println(item.getQuantity() + "x " + item.getProduct().getProductName() + "        " + item.getProduct().getProductPrice() * item.getQuantity());
         }
     }
 
@@ -74,5 +76,4 @@ public class Checkout {
         System.out.println("Amount Paid: " + totalAmount);
         System.out.println("Remaining Balance: " + customer.getBalance());
     }
-
 }

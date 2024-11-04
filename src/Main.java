@@ -1,17 +1,17 @@
 import java.time.LocalDate;
-
 //TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
 // click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
 public class Main {
     public static void main(String[] args) {
-        Product cheese = new Product("Cheese", 100, 10,LocalDate.now().plusDays(50),true,200);
-        Product tv = new Product("TV", 500, 5,LocalDate.now(),true,200);
-        Customer customer = new Customer(500);
+        Product scratchCard=new Product("Scratch card",50,3);
+        ShippableProduct cheese = new ShippableProduct("Cheese", 20, 15, LocalDate.now().plusDays(30),100,true);
+        ShippableProduct tv = new ShippableProduct("TV", 500, 5,200,true);
+        Customer customer = new Customer(1000);
         try {
             Cart cart = new Cart();
             cart.add(cheese, 2);
             cart.add(tv, 1);
-
+            cart.add(scratchCard,2);
             Checkout checkoutService = new Checkout();
             checkoutService.checkout(customer, cart);
         } catch (Exception e) {
