@@ -4,6 +4,7 @@ import java.time.LocalDate;
 public class Main {
     public static void main(String[] args) {
         Product scratchCard=new Product("Scratch card",50,3);
+        Product biscuits=new Product("Biscuits",50,3,LocalDate.now().plusDays(30));
         ShippableProduct cheese = new ShippableProduct("Cheese", 20, 15, LocalDate.now().plusDays(30),100,true);
         ShippableProduct tv = new ShippableProduct("TV", 500, 5,200,true);
         Customer customer = new Customer(1000);
@@ -12,6 +13,7 @@ public class Main {
             cart.add(cheese, 2);
             cart.add(tv, 1);
             cart.add(scratchCard,2);
+            cart.add(biscuits,2);
             Checkout checkoutService = new Checkout();
             checkoutService.checkout(customer, cart);
         } catch (Exception e) {

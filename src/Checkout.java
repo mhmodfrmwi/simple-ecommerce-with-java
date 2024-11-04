@@ -59,13 +59,13 @@ public class Checkout {
                 System.out.println(item.getQuantity() + "x " + product.getProductName() + "        " + ((ShippableProduct) product).getProductWeight() * item.getQuantity() + "g");
             }
         }
-        System.out.println("Total package weight: " + totalWeight / 1000 + " kg");
+        System.out.println("Total package weight: " + totalWeight / 1000 + " kg\n");
     }
 
     private void printCheckoutReceipt(Cart cart) {
         System.out.println("** Checkout receipt **");
         for (CartItem item : cart.getItems()) {
-            System.out.println(item.getQuantity() + "x " + item.getProduct().getProductName() + "        " + item.getProduct().getProductPrice() * item.getQuantity());
+            System.out.println(item.getQuantity() + "x " + item.getProduct().getProductName() + "        " + item.getProduct().getProductPrice() * item.getQuantity()+"$");
         }
     }
 
